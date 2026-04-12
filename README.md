@@ -1,6 +1,18 @@
 # Unraid Docker Monitor
 
 A Docker container monitor for Unraid.
+A Docker container monitor for Unraid that can view all containers on a custom Docker network.
+
+## Features
+
+- Container name, port number, directory listing
+- CPU and RAM usage with sparkline charts
+- Storage used for volumes
+- Running/not running status with green/red dot indicator
+- Sort by name, status, CPU, RAM, storage, or date
+- 13 themes (dark/light mode and more)
+- Full-width container cards with 50% CPU/RAM columns
+- Hide/show toggle button on each card
 
 ## Quick Start
 

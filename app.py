@@ -177,5 +177,12 @@ def get_status():
         'containers': [{'name': c['name'], 'state': c['state']} for c in container_stats.values()]
     })
 
+@app.route('/api/status')
+def get_status():
+    return jsonify({
+        'container_count': len(container_stats),
+        'containers': [{'name': c['name'], 'state': c['state']} for c in container_stats.values()]
+    })
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
