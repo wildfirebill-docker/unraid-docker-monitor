@@ -79,7 +79,6 @@ def get_storage_used(container):
         for mount in mounts:
             if mount.get('Type') == 'volume':
                 try:
-                    volume = docker_client.volumes.get(mount.get('Name', ''))
                     usage = docker_client.api.inspect_volume(mount.get('Name', ''))
                     if usage and 'UsageData' in usage:
                         total_size += usage['UsageData'].get('Size', 0)
@@ -152,37 +151,8 @@ def index():
 
 @app.route('/api/containers')
 def get_containers():
-    network = request.args.get('network', '')
-    sort_by = request.args.get('sort_by', 'name')
-    sort_order = request.args.get('sort_order', 'asc')
-    
     containers = list(container_stats.values())
-    
-    if network:
-        try:
-            net = docker_client.networks.get(network)
-            container_names = [c.attrs['Name'] for c in net.containers]
-            containers = [c for c in containers if c['name'].lstrip('/') in container_names]
-        except:
-            pass
-    
-    def get_sort_key(c):
-        name = c.get('name', '')
-        if sort_by == 'name':
-            return name.lower()
-        elif sort_by == 'status':
-            return c.get('state', '')
-        elif sort_by == 'cpu':
-            return c.get('stats', {}).get('cpu_percent', 0)
-        elif sort_by == 'ram':
-            return c.get('stats', {}).get('memory_percent', 0)
-        elif sort_by == 'storage':
-            return c.get('storage_used', 0)
-        elif sort_by == 'date':
-            return c.get('created', '')
-        return name.lower()
-    
-    containers.sort(key=get_sort_key, reverse=(sort_order == 'desc'))
+    containers.sort(key=lambda c: c.get('name', '').lower())
     
     for c in containers:
         c['storage_display'] = format_bytes(c.get('storage_used', 0))
@@ -197,15 +167,6 @@ def get_networks():
     try:
         networks = docker_client.networks.list()
         return jsonify([{'id': n.id, 'name': n.name} for n in networks])
-    except:
-        return jsonify([])
-
-@app.route('/api/networks/<network_id>')
-def get_network_containers(network_id):
-    try:
-        net = docker_client.networks.get(network_id)
-        containers = net.containers
-        return jsonify([{'id': c.attrs['Id'], 'name': c.attrs['Name']} for c in containers])
     except:
         return jsonify([])
 
