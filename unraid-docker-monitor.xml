@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>unraid-docker-monitor</Name>
+  <Repository>ghcr.io/wildfirebill-docker/unraid-docker-monitor:latest</Repository>
+  <Registry>ghcr.io</Registry>
+  <Network>bridge</Network>
+  <WebUI>http://[IP]:[PORT:5000]</WebUI>
+  <Category>Other:</Category>
+  <Overview>A real-time monitoring dashboard for Docker containers, designed for Unraid but works anywhere with Docker.</Overview>
+  <Project>https://github.com/wildfirebill-docker/unraid-docker-monitor</Project>
+  <Author>wildfirebill</Author>
+  <Support>https://github.com/wildfirebill-docker/unraid-docker-monitor/issues</Support>
+  <Icon></Icon>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <ExtraParams>-v /var/run/docker.sock:/var/run/docker.sock:ro</ExtraParams>
+  <PostArgs></PostArgs>
+  <Config Name="WebUI" Target="5000" Default="5000" Mode="tcp" Description="WebUI Port" Type="Port" Display="always" Required="true" Mask="false">5000</Config>
+</Container>
