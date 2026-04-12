@@ -9,120 +9,207 @@
     <style>
         :root, [data-theme="github-dark"] { --bg: #0d1117; --card-bg: #161b22; --border: #30363d; --text-primary: #e6edf3; --text-secondary: #8b949e; --accent: #58a6ff; --success: #3fb950; --error: #f85149; --warning: #d29922; --shadow: rgba(0,0,0,0.3); }
         [data-theme="github-light"] { --bg: #f6f8fa; --card-bg: #ffffff; --border: #d0d7de; --text-primary: #1f2328; --text-secondary: #656d76; --accent: #0969da; --success: #1a7f37; --error: #cf222e; --warning: #9a6700; --shadow: rgba(0,0,0,0.1); }
-        [data-theme="dracula"] { --bg: #282a36; --card-bg: #383a59; --border: #44475a; --text-primary: #f8f8f2; --text-secondary: #6272a4; --accent: #bd93f9; --success: #50fa7b; --error: #ff5555; --warning: #f1fa8c; --shadow: rgba(0,0,0,0.4); }
-        [data-theme="nord"] { --bg: #2e3440; --card-bg: #3b4252; --border: #4c566a; --text-primary: #eceff4; --text-secondary: #d8dee9; --accent: #88c0d0; --success: #a3be8c; --error: #bf616a; --warning: #ebcb8b; --shadow: rgba(0,0,0,0.3); }
-        [data-theme="monokai"] { --bg: #272822; --card-bg: #3e3d32; --border: #49483e; --text-primary: #f8f8f2; --text-secondary: #75715e; --accent: #66d9ef; --success: #a6e22e; --error: #f92672; --warning: #e6db74; --shadow: rgba(0,0,0,0.4); }
-        [data-theme="one-dark"] { --bg: #282c34; --card-bg: #21252b; --border: #181a1f; --text-primary: #abb2bf; --text-secondary: #5c6370; --accent: #61afef; --success: #98c379; --error: #e06c75; --warning: #e5c07b; --shadow: rgba(0,0,0,0.3); }
-        [data-theme="gruvbox-dark"] { --bg: #282828; --card-bg: #3c3836; --border: #504945; --text-primary: #ebdbb2; --text-secondary: #a89984; --accent: #458588; --success: #b8bb26; --error: #fb4934; --warning: #d79921; --shadow: rgba(0,0,0,0.3); }
-        [data-theme="gruvbox-light"] { --bg: #fbf1c7; --card-bg: #ebdbb2; --border: #d5c4a1; --text-primary: #3c3836; --text-secondary: #665c54; --accent: #076678; --success: #98971a; --error: #cc241d; --warning: #d79921; --shadow: rgba(0,0,0,0.15); }
-        [data-theme="tokyo-night"] { --bg: #1a1b26; --card-bg: #24283b; --border: #414868; --text-primary: #c0caf5; --text-secondary: #565f89; --accent: #7aa2f7; --success: #9ece6a; --error: #f7768e; --warning: #e0af68; --shadow: rgba(0,0,0,0.3); }
-        [data-theme="tokyo-storm"] { --bg: #1f2335; --card-bg: #292d3e; --border: #3b4261; --text-primary: #959db9; --text-secondary: #717598; --accent: #82aaff; --success: #c0caf5; --error: #f7768e; --warning: #ff9e64; --shadow: rgba(0,0,0,0.3); }
-        [data-theme="catppuccin"] { --bg: #1e1e2e; --card-bg: #313244; --border: #45475a; --text-primary: #cdd6f4; --text-secondary: #a6adc8; --accent: #89b4fa; --success: #a6e3a1; --error: #f38ba8; --warning: #f9e2af; --shadow: rgba(0,0,0,0.3); }
-        [data-theme="solarized-dark"] { --bg: #002b36; --card-bg: #073642; --border: #586e75; --text-primary: #fdf6e3; --text-secondary: #839496; --accent: #268bd2; --success: #859900; --error: #dc322f; --warning: #b58900; --shadow: rgba(0,0,0,0.3); }
-        [data-theme="horizon"] { --bg: #1c1e26; --card-bg: #23242d; --border: #3d3d4a; --text-primary: #e3e1e8; --text-secondary: #9da0b3; --accent: #e783b9; --success: #5fd3a3; --error: #e45560; --warning: #f0c05c; --shadow: rgba(0,0,0,0.3); }
-        [data-theme="dracula"], [data-theme="monokai"] { --text-primary: #f8f8f2; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'JetBrains Mono', monospace; background: var(--bg); color: var(--text-primary); min-height: 100vh; transition: background 0.3s, color 0.3s; }
+        body { font-family: 'JetBrains Mono', monospace; background: var(--bg); color: var(--text-primary); min-height: 100vh; }
         .header { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; position: sticky; top: 0; z-index: 100; }
         .logo { display: flex; align-items: center; gap: 12px; font-size: 1.25rem; font-weight: 600; }
-        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent), var(--success)); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent), var(--success)); border-radius: 8px; }
         .header-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .select-wrapper { position: relative; }
-        select { background: var(--bg); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 32px 8px 12px; border-radius: 6px; font-family: inherit; font-size: 0.875rem; cursor: pointer; appearance: none; min-width: 150px; }
-        select:focus { outline: none; border-color: var(--accent); }
-        .select-arrow { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--text-secondary); font-size: 0.625rem; }
-        .btn { background: var(--bg); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 16px; border-radius: 6px; font-family: inherit; font-size: 0.875rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
-        .btn:hover { border-color: var(--accent); background: var(--card-bg); }
-        .main-content { padding: 24px; max-width: 100%; margin: 0 auto; width: 100%; }
-        .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
-        .sort-controls { display: flex; align-items: center; gap: 8px; }
-        .sort-label { color: var(--text-secondary); font-size: 0.875rem; }
-        #containerGrid, .container-grid { display: flex; flex-direction: column; gap: 16px; min-width: 0; box-sizing: border-box; width: 100%; max-width: 100%; overflow: hidden; }
-        .container-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: transform 0.2s, box-shadow 0.2s; min-width: 0; box-sizing: border-box; overflow: hidden; max-width: 100%; }
-        .container-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--shadow); }
+        select { background: var(--bg); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 12px; border-radius: 6px; font-family: inherit; font-size: 0.875rem; cursor: pointer; min-width: 150px; }
+        .btn { background: var(--bg); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 16px; border-radius: 6px; font-family: inherit; font-size: 0.875rem; cursor: pointer; }
+        .main-content { padding: 24px; }
+        #containerGrid { display: flex; flex-direction: column; gap: 16px; }
+        .container-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
         .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-        .card-toggle { background: none; border: none; color: var(--text-primary); cursor: pointer; padding: 4px 8px; font-size: 1rem; border-radius: 4px; transition: background 0.2s; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
-        .card-toggle:hover { background: var(--bg); }
-        .card-content { display: block; }
-        .card-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        @media (max-width: 768px) { .card-columns { grid-template-columns: 1fr; } }
-        .card-info-section { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-        @media (max-width: 600px) { .card-info-section { grid-template-columns: 1fr; } }
-        .info-column, .dir-column { display: flex; flex-direction: column; gap: 8px; }
-        .dir-column .dir-item { background: var(--bg); padding: 6px 8px; border-radius: 4px; font-size: 0.75rem; }
-        .container-name { display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: 600; word-break: break-all; }
+        .container-name { display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: 600; }
         .status-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-        .status-dot.running { background: var(--success); animation: pulse 2s infinite; }
+        .status-dot.running { background: var(--success); }
         .status-dot.stopped { background: var(--error); }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); } }
-        .info-row { display: flex; gap: 8px; align-items: baseline; }
-        .info-label { color: var(--text-secondary); min-width: 60px; flex-shrink: 0; font-size: 0.8125rem; }
-        .info-value { color: var(--text-primary); word-break: break-all; font-size: 0.875rem; }
+        .card-toggle { background: none; border: none; color: var(--text-primary); cursor: pointer; font-size: 1rem; width: 32px; height: 32px; }
+        .card-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .card-info-section { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .info-row { display: flex; gap: 8px; margin-bottom: 4px; }
+        .info-label { color: var(--text-secondary); min-width: 60px; font-size: 0.8125rem; }
+        .info-value { color: var(--text-primary); font-size: 0.875rem; }
         .ports-list { display: flex; flex-wrap: wrap; gap: 6px; }
         .port-badge { background: var(--accent); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
         .metric-card { background: var(--bg); padding: 10px; border-radius: 8px; }
         .metric-label { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 6px; }
-        .metric-value { font-size: 1.125rem; font-weight: 600; margin-bottom: 6px; }
+        .metric-value { font-size: 1.125rem; font-weight: 600; }
         .metric-value.cpu { color: var(--accent); }
         .metric-value.ram { color: var(--warning); }
         .chart-container { height: 50px; margin-top: 8px; }
-        .storage-section { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+        .storage-section { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
         .storage-label { font-size: 0.8125rem; color: var(--text-secondary); }
-        .storage-value { font-size: 0.875rem; font-weight: 500; color: var(--success); }
+        .storage-value { font-size: 0.875rem; color: var(--success); }
+        .dir-column .dir-item { background: var(--bg); padding: 6px 8px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 4px; }
         .empty-state { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
-        .auto-refresh-indicator { font-size: 0.75rem; color: var(--text-secondary); }
+        @media (max-width: 768px) { .card-columns, .card-info-section { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="logo"><div class="logo-icon"></div><span>Unraid Docker Monitor</span></div>
         <div class="header-controls">
-            <div class="select-wrapper">
-                <select id="networkSelect"><option value="">All Networks</option></select><span class="select-arrow">v</span>
-            </div>
-            <div class="select-wrapper">
-                <select id="themeSelect">
-                    <option value="github-dark">GitHub Dark</option><option value="github-light">GitHub Light</option><option value="dracula">Dracula</option><option value="nord">Nord</option><option value="monokai">Monokai</option><option value="one-dark">One Dark</option><option value="gruvbox-dark">Gruvbox Dark</option><option value="gruvbox-light">Gruvbox Light</option><option value="tokyo-night">Tokyo Night</option><option value="tokyo-storm">Tokyo Storm</option><option value="catppuccin">Catppuccin</option><option value="solarized-dark">Solarized Dark</option><option value="horizon">Horizon</option>
-                </select><span class="select-arrow">v</span>
-            </div>
+            <select id="networkSelect"><option value="">All Networks</option></select>
+            <select id="themeSelect">
+                <option value="github-dark">GitHub Dark</option>
+                <option value="github-light">GitHub Light</option>
+            </select>
             <button class="btn" id="refreshBtn">Refresh</button>
         </div>
     </header>
     <main class="main-content">
-        <div class="toolbar">
-            <div class="sort-controls">
-                <span class="sort-label">Sort by:</span>
-                <div class="select-wrapper">
-                    <select id="sortSelect">
-                        <option value="name">Name</option><option value="status">Status</option><option value="cpu">CPU</option><option value="ram">RAM</option><option value="storage">Storage</option><option value="date">Date</option>
-                    </select><span class="select-arrow">v</span>
-                </div>
-                <button class="btn" id="sortOrderBtn">ASC</button>
-            </div>
-            <div class="auto-refresh-indicator">Auto-refresh: <span>ON</span></div>
-        </div>
-        <div id="containerGrid" class="container-grid"></div>
+        <div id="containerGrid"></div>
     </main>
     <script>
-        let charts = {}; let currentTheme = localStorage.getItem('theme') || 'github-dark';
-        document.documentElement.setAttribute('data-theme', currentTheme); document.getElementById('themeSelect').value = currentTheme;
-        async function loadNetworks(){try{const res=await fetch('/api/networks');const networks=await res.json();const select=document.getElementById('networkSelect');networks.forEach(net=>{const opt=document.createElement('option');opt.value=net.id;opt.textContent=net.name;select.appendChild(opt);});}catch(e){console.error(e);}}
-        async function loadContainers(){const network=document.getElementById('networkSelect').value;const sortBy=document.getElementById('sortSelect').value;const sortOrder=document.getElementById('sortOrderBtn').textContent==='ASC'?'asc':'desc';try{const res=await fetch(`/api/containers?network=${network}&sort_by=${sortBy}&sort_order=${sortOrder}`);const containers=await res.json();renderContainers(containers);}catch(e){document.getElementById('containerGrid').innerHTML='<div class="empty-state"><p>Failed to connect to Docker.</p></div>';}}
-        function renderContainers(containers){const grid=document.getElementById('containerGrid');grid.innerHTML='';if(containers.length===0){grid.innerHTML='<div class="empty-state"><p>No containers found</p></div>';return;}
-        containers.forEach(container=>{grid.appendChild(createContainerCard(container));});}
-        function createContainerCard(container){const isRunning=container.state==='running';const card=document.createElement('div');card.className='container-card';card.id='container-'+container.short_id;
-        const portsHtml=container.ports.length>0?container.ports.map(p=>'<span class="port-badge">'+p+'</span>').join(''):'<span class="info-value">-</span>';
-        const dirsHtml=container.directories.length>0?container.directories.map(d=>'<div class="dir-item"><span>'+(d.source.substring(0,30))+(d.source.length>30?'...':'')+'</span> -> <span>'+d.destination+'</span></div>').join(''):'<span class="info-value">-</span>';
-        const history=JSON.parse(container.history_json||'{"cpu":[],"memory":[]}');const chartIdCpu='chart-cpu-'+container.short_id;const chartIdRam='chart-ram-'+container.short_id;
-        card.innerHTML='<div class="card-header"><div class="container-name"><span class="status-dot '+(isRunning?'running':'stopped')+'"></span><span>'+container.name+'</span></div><button class="card-toggle" onclick="var c=this.closest(\'.container-card\'),t=c.querySelector(\'.card-content\');c.classList.toggle(\'collapsed\');t.style.display=c.classList.contains(\'collapsed\')?'none':'block';this.textContent=c.classList.contains(\'collapsed\')?'+':\'-\';">-</button></div><div class="card-content"><div class="card-info-section"><div class="info-column"><div class="info-row"><span class="info-label">Image:</span><span class="info-value">'+container.image+'</span></div><div class="info-row"><span class="info-label">Status:</span><span class="info-value" style="color:'+(isRunning?'var(--success)':'var(--error)')+'">'+container.status+'</span></div><div class="info-row"><span class="info-label">Ports:</span><div class="ports-list">'+portsHtml+'</div></div></div><div class="dir-column"><div class="info-label">Directories:</div>'+dirsHtml+'</div></div><div class="card-columns"><div class="metric-card"><div class="metric-label">CPU Usage</div><div class="metric-value cpu">'+container.stats.cpu_percent.toFixed(1)+'%</div><div class="chart-container"><canvas id="'+chartIdCpu+'"></canvas></div></div><div class="metric-card"><div class="metric-label">RAM Usage</div><div class="metric-value ram">'+container.memory_display+' / '+container.memory_limit_display+'</div><div class="chart-container"><canvas id="'+chartIdRam+'"></canvas></div></div></div><div class="storage-section"><span class="storage-label">Storage:</span><span class="storage-value">'+container.storage_display+'</span></div></div>';
-        setTimeout(()=>{createChart(chartIdCpu,history.cpu,'#58a6ff');createChart(chartIdRam,history.memory,'#d29922');},100);return card;}
-        function createChart(canvasId,data,color){const canvas=document.getElementById(canvasId);if(!canvas)return;const ctx=canvas.getContext('2d');if(charts[canvasId])charts[canvasId].destroy();charts[canvasId]=new Chart(ctx,{type:'line',data:{labels:data.map((_,i)=>i),datasets:[{data:data,borderColor:color,backgroundColor:color+'33',fill:true,tension:0.4,pointRadius:0,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:false},scales:{x:{display:false},y:{display:false,min:0,max:100}},animation:{duration:300}}});}
-        document.getElementById('themeSelect').addEventListener('change',(e)=>{currentTheme=e.target.value;document.documentElement.setAttribute('data-theme',currentTheme);localStorage.setItem('theme',currentTheme);});
-        document.getElementById('refreshBtn').addEventListener('click',loadContainers);
-        document.getElementById('sortSelect').addEventListener('change',loadContainers);
-        document.getElementById('sortOrderBtn').addEventListener('click',()=>{document.getElementById('sortOrderBtn').textContent=document.getElementById('sortOrderBtn').textContent==='ASC'?'DESC':'ASC';loadContainers();});
-        document.getElementById('networkSelect').addEventListener('change',loadContainers);
-        loadNetworks();loadContainers();setInterval(loadContainers,30000);
+        let charts = {};
+        let currentTheme = localStorage.getItem('theme') || 'github-dark';
+        
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        document.getElementById('themeSelect').value = currentTheme;
+
+        async function loadContainers() {
+            try {
+                const res = await fetch('/api/containers');
+                const containers = await res.json();
+                renderContainers(containers);
+            } catch(e) {
+                console.error(e);
+                document.getElementById('containerGrid').innerHTML = '<div class="empty-state">Failed to load containers</div>';
+            }
+        }
+
+        function renderContainers(containers) {
+            const grid = document.getElementById('containerGrid');
+            grid.innerHTML = '';
+            
+            if (containers.length === 0) {
+                grid.innerHTML = '<div class="empty-state">No containers found</div>';
+                return;
+            }
+            
+            containers.forEach(function(container) {
+                grid.appendChild(createContainerCard(container));
+            });
+        }
+
+        function createContainerCard(container) {
+            const isRunning = container.state === 'running';
+            const card = document.createElement('div');
+            card.className = 'container-card';
+            
+            let portsHtml = '-';
+            if (container.ports && container.ports.length > 0) {
+                portsHtml = container.ports.map(function(p) {
+                    return '<span class="port-badge">' + p + '</span>';
+                }).join('');
+            }
+
+            let dirsHtml = '-';
+            if (container.directories && container.directories.length > 0) {
+                dirsHtml = container.directories.map(function(d) {
+                    let src = d.source;
+                    if (src.length > 30) src = src.substring(0, 30) + '...';
+                    return '<div class="dir-item">' + src + ' -> ' + d.destination + '</div>';
+                }).join('');
+            }
+
+            let history = { cpu: [], memory: [] };
+            try {
+                history = JSON.parse(container.history_json || '{"cpu":[],"memory":[]}');
+            } catch(e) {}
+
+            const chartIdCpu = 'chart-cpu-' + container.short_id;
+            const chartIdRam = 'chart-ram-' + container.short_id;
+            const statusColor = isRunning ? 'var(--success)' : 'var(--error)';
+
+            card.innerHTML = 
+                '<div class="card-header">' +
+                    '<div class="container-name">' +
+                        '<span class="status-dot ' + (isRunning ? 'running' : 'stopped') + '"></span>' +
+                        '<span>' + container.name + '</span>' +
+                    '</div>' +
+                    '<button class="card-toggle" data-id="' + container.short_id + '">-</button>' +
+                '</div>' +
+                '<div class="card-info-section">' +
+                    '<div class="info-column">' +
+                        '<div class="info-row"><span class="info-label">Image:</span><span class="info-value">' + container.image + '</span></div>' +
+                        '<div class="info-row"><span class="info-label">Status:</span><span class="info-value" style="color:' + statusColor + '">' + container.status + '</span></div>' +
+                        '<div class="info-row"><span class="info-label">Ports:</span><div class="ports-list">' + portsHtml + '</div></div>' +
+                    '</div>' +
+                    '<div class="dir-column">' +
+                        '<div class="info-label">Directories:</div>' + dirsHtml +
+                    '</div>' +
+                '</div>' +
+                '<div class="card-columns">' +
+                    '<div class="metric-card">' +
+                        '<div class="metric-label">CPU Usage</div>' +
+                        '<div class="metric-value cpu">' + container.stats.cpu_percent.toFixed(1) + '%</div>' +
+                        '<div class="chart-container"><canvas id="' + chartIdCpu + '"></canvas></div>' +
+                    '</div>' +
+                    '<div class="metric-card">' +
+                        '<div class="metric-label">RAM Usage</div>' +
+                        '<div class="metric-value ram">' + container.memory_display + ' / ' + container.memory_limit_display + '</div>' +
+                        '<div class="chart-container"><canvas id="' + chartIdRam + '"></canvas></div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="storage-section">' +
+                    '<span class="storage-label">Storage:</span>' +
+                    '<span class="storage-value">' + container.storage_display + '</span>' +
+                '</div>';
+
+            setTimeout(function() {
+                createChart(chartIdCpu, history.cpu, '#58a6ff');
+                createChart(chartIdRam, history.memory, '#d29922');
+            }, 100);
+
+            return card;
+        }
+
+        function createChart(canvasId, data, color) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            if (charts[canvasId]) {
+                charts[canvasId].destroy();
+            }
+            
+            charts[canvasId] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(function(_, i) { return i; }),
+                    datasets: [{
+                        data: data,
+                        borderColor: color,
+                        backgroundColor: color + '33',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: false },
+                    scales: { x: { display: false }, y: { display: false, min: 0, max: 100 } },
+                    animation: { duration: 300 }
+                }
+            });
+        }
+
+        document.getElementById('themeSelect').addEventListener('change', function(e) {
+            currentTheme = e.target.value;
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+        });
+
+        document.getElementById('refreshBtn').addEventListener('click', loadContainers);
+
+        loadContainers();
+        setInterval(loadContainers, 30000);
     </script>
 </body>
 </html>
