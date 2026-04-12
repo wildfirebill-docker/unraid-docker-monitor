@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   unraid-docker-monitor:
-    image: wildfirebill/unraid-docker-monitor
+    image: ghcr.io/wildfirebill-docker/unraid-docker-monitor:latest
     container_name: unraid-docker-monitor
     ports:
       - "5000:5000"
