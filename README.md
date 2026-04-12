@@ -23,7 +23,7 @@ docker run -d \
   --name unraid-docker-monitor \
   -p 5000:5000 \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  wildfirebill/unraid-docker-monitor
+  ghcr.io/wildfirebill/unraid-docker-monitor:latest
 ```
 
 Then open `http://localhost:5000` in your browser.
@@ -34,7 +34,7 @@ Then open `http://localhost:5000` in your browser.
 version: '3.8'
 services:
   unraid-docker-monitor:
-    image: wildfirebill/unraid-docker-monitor
+    image: ghcr.io/wildfirebill/unraid-docker-monitor:latest
     container_name: unraid-docker-monitor
     ports:
       - "5000:5000"
@@ -56,14 +56,14 @@ services:
 ```bash
 git clone https://github.com/wildfirebill/unraid-docker-monitor
 cd unraid-docker-monitor
-docker build -t wildfirebill/unraid-docker-monitor .
-docker run -d -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock:ro wildfirebill/unraid-docker-monitor
+docker build -t ghcr.io/wildfirebill/unraid-docker-monitor:latest .
+docker run -d -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock:ro ghcr.io/wildfirebill/unraid-docker-monitor:latest
 ```
 
 ## Environment Variables
 
 | Variable | Description | Default |
-|-----------|-------------|
+|-----------|-------------|---------|
 | `DOCKER_HOST` | Docker socket path | `unix:///var/run/docker.sock` |
 
 ## API Endpoints
