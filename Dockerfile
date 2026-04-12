@@ -13,3 +13,5 @@ COPY templates/ ./templates/
 EXPOSE 5000
 
 CMD ["python", "app.py"]
+
+LABEL org.opencontainers.image.description DESCRIPTION
