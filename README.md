@@ -57,7 +57,7 @@ services:
 git clone https://github.com/wildfirebill-docker/unraid-docker-monitor
 cd unraid-docker-monitor
 docker build -t wildfirebill/unraid-docker-monitor .
-docker run -d -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock:ro wildfirebill/unraid-docker-monitor
+docker run -d -p 5000:5000 -v /var/run/docker.sock:/var/run/docker.sock:ro wildfirebill-docker/unraid-docker-monitor
 ```
 
 ## Environment Variables
