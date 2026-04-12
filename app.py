@@ -3,7 +3,11 @@ import docker
 import json
 import threading
 import time
+import logging
 from datetime import datetime
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
@@ -98,6 +102,7 @@ def collect_container_data():
     while True:
         try:
             containers = docker_client.containers.list(all=True)
+            logger.info(f"Found {len(containers)} containers")
             
             for container in containers:
                 try:
@@ -114,7 +119,7 @@ def collect_container_data():
                         container_history[container_id]['cpu'] = container_history[container_id]['cpu'][-MAX_HISTORY:]
                     if len(container_history[container_id]['memory']) > MAX_HISTORY:
                         container_history[container_id]['memory'] = container_history[container_id]['memory'][-MAX_HISTORY:]
-
+                    
                     image_name = container.attrs.get('Config', {}).get('Image', '') or str(container.image)
                     
                     container_stats[container_id] = {
@@ -132,9 +137,9 @@ def collect_container_data():
                         'history': container_history[container_id]
                     }
                 except Exception as e:
-                    pass
+                    logger.error(f"Error getting container {container.name}: {e}")
         except Exception as e:
-            pass
+            logger.error(f"Error connecting to Docker: {e}")
         
         time.sleep(3)
 
@@ -203,6 +208,13 @@ def get_network_containers(network_id):
         return jsonify([{'id': c.attrs['Id'], 'name': c.attrs['Name']} for c in containers])
     except:
         return jsonify([])
+
+@app.route('/api/status')
+def get_status():
+    return jsonify({
+        'container_count': len(container_stats),
+        'containers': [{'name': c['name'], 'state': c['state']} for c in container_stats.values()]
+    })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
