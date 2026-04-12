@@ -2,10 +2,18 @@ version: '3.8'
 
 services:
   unraid-docker-monitor:
-    image: ghcr.io/wildfirebill-docker/unraid-docker-monitor:latest
+    build: .
     container_name: unraid-docker-monitor
     ports:
       - "5000:5000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
     restart: unless-stopped
+    networks:
+      - monitor
+
+networks:
+  monitor:
+    driver: bridge
