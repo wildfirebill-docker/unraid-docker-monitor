@@ -1,5 +1,7 @@
 # Unraid Docker Monitor
 
+Created by [wildfirebill](https://github.com/wildfirebill)
+
 A real-time monitoring dashboard for Docker containers, designed for Unraid but works anywhere with Docker.
 
 ## Features
@@ -12,7 +14,7 @@ A real-time monitoring dashboard for Docker containers, designed for Unraid but 
 - **Directory Listing**: Shows mounted volumes and bind mounts
 - **Sorting**: By name, status, CPU, RAM, storage, date
 - **Filtering**: Filter by Docker network
-- **Themes**: 13 built-in themes (GitHub Dark/Light, Dracula, Nord, Monokai, One Dark, Gruvbox, Tokyo Night, Tokyo Storm, Catppuccin, Solarized, Horizon)
+- **Themes**: 13 built-in themes (GitHub Dark/Light, Dracula, Nord, Monokai, One Dark, Gruvbox Dark/Light, Tokyo Night, Tokyo Storm, Catppuccin, Solarized Dark, Horizon)
 - **Auto-refresh**: Updates every 30 seconds
 - **Zero CVEs**: Built with Alpine edge repositories, all security patches applied
 
@@ -31,7 +33,6 @@ Then open `http://localhost:5000` in your browser.
 ## Docker Compose
 
 ```yaml
-version: '3.8'
 services:
   unraid-docker-monitor:
     image: ghcr.io/wildfirebill-docker/unraid-docker-monitor:latest
